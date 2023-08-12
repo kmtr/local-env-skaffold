@@ -1,0 +1,30 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+metadata:
+  name: local-sample
+profiles:
+  - name: local
+    requiresAllActivations: false
+    patches:
+      - op: replace
+        path: /deploy/kubectl/flags/global/0
+        value: --namespace=local-dev
+build:
+  artifacts:
+    - image: local-sample
+      context: ../app/local-demo
+      docker:
+        dockerfile: Dockerfile
+        noCache: false
+        pullParent: false
+        squash: false
+  local:
+    push: false
+    useBuildkit: true
+    concurrency: 1
+    tryImportMissing: false
+    useDockerCLI: false
+  
+manifests:
+  rawYaml:
+    - ../infra/k8s/local-sample.yaml

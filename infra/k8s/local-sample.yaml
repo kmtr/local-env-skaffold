@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: local-dev
+  labels:
+    name: local-dev
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: local-sample
+spec:
+  selector:
+    matchLabels:
+      app: local-sample
+  template:
+    metadata:
+      labels:
+        app: local-sample
+    spec:
+      containers:
+      - name: local-sample
+        image: local-sample
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8888

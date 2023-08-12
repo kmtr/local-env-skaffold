@@ -1,0 +1,1 @@
+module localhost/golang/hello

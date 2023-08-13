@@ -27,4 +27,5 @@ build:
   
 manifests:
   rawYaml:
+    - ../infra/k8s/local-namespace.yaml
     - ../infra/k8s/local-sample.yaml
